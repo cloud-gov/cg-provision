@@ -314,6 +314,9 @@ module "opensearch_logs_customer" {
   master_user_password = var.opensearch_logs_customer_master_password
 }
 
+module "opensearch_provider" {
+  domain_name = "${var.stack_description}-logs-customer"
+}
 
 module "logsearch" {
   source = "../../modules/logsearch"
