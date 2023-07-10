@@ -315,7 +315,8 @@ module "opensearch_logs_customer" {
 }
 
 module "opensearch_provider" {
-  domain_name = "${var.stack_description}-logs-customer"
+  source               = "../../modules/opensearch_provider"
+  domain_name          = "${var.stack_description}-logs-customer"
 }
 
 module "logsearch" {
