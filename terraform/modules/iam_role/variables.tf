@@ -22,11 +22,11 @@ variable "iam_assume_role_policy" {
       "Effect": "Allow"
     },
     {
-      "Effect": "Allow",
+      "Action": "sts:AssumeRole",
       "Principal": {
         "Service": "opensearchservice.amazonaws.com"
       },
-      "Action": "sts:AssumeRole"}
+      "Effect": "Allow"
     }
   ]
 }
