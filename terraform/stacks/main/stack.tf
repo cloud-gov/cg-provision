@@ -51,10 +51,10 @@ provider "aws" {
 }
 # Configure the Opensearch provider
 provider "opensearch" {
-  url           = var.opensearch_logs_customer_endpoint
+  url = var.opensearch_logs_customer_endpoint
   # username      = var.opensearch_logs_customer_master_username
   # password      = var.opensearch_logs_customer_master_password
-  aws_region    = var.aws_default_region
+  aws_region        = var.aws_default_region
   sign_aws_requests = true
 }
 
@@ -317,25 +317,25 @@ module "opensearch_logs_customer" {
   count                                     = var.deploy_opensearch_logs_customer ? 1 : 0
   source                                    = "../../modules/opensearch_domain"
   domain_name                               = "${var.stack_description}-logs-customer"
-  master_user_name                          = var.opensearch_logs_customer_master_username
-  master_user_password                      = var.opensearch_logs_customer_master_password
+  internal_user_database_enabled            = false
   vpc_id                                    = module.stack.vpc_id
+  master_user_arn                           = "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:role/bosh-passed/${data.terraform_remote_state.target_vpc.outputs.concourse_worker_profile}"
   allow_incoming_traffic_security_group_ids = [module.stack.bosh_security_group]
   allow_incoming_traffic_cidrs = [
     data.terraform_remote_state.target_vpc.outputs.production_concourse_subnet_cidr
   ]
-  subnet_ids                                = [
+  subnet_ids = [
     module.cf.services_subnet_az1,
     module.cf.services_subnet_az2
   ]
 }
 
 module "opensearch_provider" {
-  count                = var.deploy_opensearch_logs_customer ? 1 : 0
-  source               = "../../modules/opensearch_provider"
-  domain_name          = "${var.stack_description}-logs-customer"
+  count       = var.deploy_opensearch_logs_customer ? 1 : 0
+  source      = "../../modules/opensearch_provider"
+  domain_name = "${var.stack_description}-logs-customer"
   providers = {
-    aws         = aws
+    aws        = aws
     opensearch = opensearch
   }
 }

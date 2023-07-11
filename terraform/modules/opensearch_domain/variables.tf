@@ -39,6 +39,11 @@ variable "master_user_password" {
   type = string
 }
 
+variable "master_user_arn" {
+  type        = string
+  description = "ARN for IAM principal to use as master user"
+}
+
 variable "vpc_id" {
   type        = string
   description = "VPC ID to use"
@@ -52,7 +57,7 @@ variable "allow_incoming_traffic_security_group_ids" {
 variable "allow_incoming_traffic_cidrs" {
   type        = list(string)
   description = "Specifies IP CIDR ranges that should be able to send incoming traffic to this domain"
-  default = []
+  default     = []
 }
 
 variable "subnet_ids" {
