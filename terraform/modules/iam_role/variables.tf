@@ -20,13 +20,14 @@ variable "iam_assume_role_policy" {
         "Service": "ec2.amazonaws.com"
       },
       "Effect": "Allow"
-    }
+    },
     {
       Effect": "Allow",
       "Principal": {
         "Service": "opensearchservice.amazonaws.com"
       },
       "Action": "sts:AssumeRole"}
+    }
   ]
 }
 EOF
