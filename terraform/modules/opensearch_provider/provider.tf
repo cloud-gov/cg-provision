@@ -1,6 +1,6 @@
 # Configure the Opensearch provider
 provider "opensearch" {
-  url = var.domain_name
+  url = "localhost:9200"
 }
 
 resource "opensearch_index" "test" {
