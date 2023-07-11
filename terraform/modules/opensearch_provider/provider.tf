@@ -1,7 +1,7 @@
 # Configure the Opensearch provider
 provider "opensearch" {
   url = "localhost:9200"
-  healthchecking = false
+  healthcheck = false
 }
 
 resource "opensearch_index" "test" {
