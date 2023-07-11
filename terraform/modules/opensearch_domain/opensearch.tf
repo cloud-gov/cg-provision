@@ -1,10 +1,3 @@
-# Configure the Opensearch provider
-provider "opensearch" {
-  url = aws_opensearch_domain.opensearch.endpoint
-  username = var.master_user_name
-  password = var.master_user_password
-}
-
 resource "aws_opensearch_domain" "opensearch" {
   domain_name    = var.domain_name
   engine_version = var.engine
@@ -48,53 +41,4 @@ resource "aws_opensearch_domain" "opensearch" {
   vpc_options {
     subnet_ids = var.private_elb_subnets
   }
-}
-
-resource "opensearch_index" "test" {
-  name               = "terraform-test"
-  number_of_shards   = 1
-  number_of_replicas = 1
-  mappings           = <<EOF
-{
-  "people": {
-    "_all": {
-      "enabled": false
-    },
-    "properties": {
-      "email": {
-        "type": "text"
-      }
-    }
-  }
-}
-EOF
-}
-
-resource "opensearch_component_template" "test" {
-  name = "terraform-test"
-  body = <<EOF
-{
-  "template": {
-    "settings": {
-      "index": {
-        "number_of_shards": 1
-      }
-    },
-    "mappings": {
-      "properties": {
-        "host_name": {
-          "type": "keyword"
-        },
-        "created_at": {
-          "type": "date",
-          "format": "EEE MMM dd HH:mm:ss Z yyyy"
-        }
-      }
-    },
-    "aliases": {
-      "mydata": { }
-    }
-  }
-}
-EOF
 }
