@@ -51,7 +51,7 @@ provider "aws" {
 }
 # Configure the Opensearch provider
 provider "opensearch" {
-  url           = module.opensearch_logs_customer.opensearch_logs_customer_endpoint
+  url           = var.opensearch_logs_customer_endpoint
   username      = var.opensearch_logs_customer_master_username
   password      = var.opensearch_logs_customer_master_password
 }

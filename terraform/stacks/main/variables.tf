@@ -85,6 +85,9 @@ variable "opensearch_logs_customer_master_username" {
 variable "opensearch_logs_customer_master_password" {
   type = string
 }
+variable "opensearch_logs_customer_endpoint" {
+  type = string
+}
 
 variable "upstream_blobstore_bucket_name" {
 }
