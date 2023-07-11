@@ -321,7 +321,13 @@ module "opensearch_logs_customer" {
   master_user_password                      = var.opensearch_logs_customer_master_password
   vpc_id                                    = module.stack.vpc_id
   allow_incoming_traffic_security_group_ids = [module.stack.bosh_security_group]
-  subnet_ids                                = [module.cf.services_subnet_az1, module.cf.services_subnet_az2]
+  allow_incoming_traffic_cidrs = [
+    data.terraform_remote_state.target_vpc.outputs.production_concourse_subnet_cidr
+  ]
+  subnet_ids                                = [
+    module.cf.services_subnet_az1,
+    module.cf.services_subnet_az2
+  ]
 }
 
 module "opensearch_provider" {

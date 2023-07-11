@@ -49,6 +49,12 @@ variable "allow_incoming_traffic_security_group_ids" {
   description = "Specifies AWS Security Group IDs that should be able to send incoming traffic to this domain"
 }
 
+variable "allow_incoming_traffic_cidrs" {
+  type        = list(string)
+  description = "Specifies IP CIDR ranges that should be able to send incoming traffic to this domain"
+  default = []
+}
+
 variable "subnet_ids" {
   type        = list(string)
   description = "AWS Subnet IDs to use for Opensearch domain"

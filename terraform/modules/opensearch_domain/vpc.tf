@@ -10,6 +10,13 @@ resource "aws_security_group" "opensearch_customer" {
     security_groups = var.allow_incoming_traffic_security_group_ids
   }
 
+  ingress {
+    from_port       = 443
+    to_port         = 443
+    protocol        = "tcp"
+    security_groups = var.allow_incoming_traffic_cidrs
+  }
+
   egress {
     from_port       = 0
     to_port         = 0
