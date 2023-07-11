@@ -56,6 +56,7 @@ provider "opensearch" {
   # password      = var.opensearch_logs_customer_master_password
   aws_region        = var.aws_default_region
   sign_aws_requests = true
+  healthcheck = false
 }
 
 data "terraform_remote_state" "target_vpc" {
