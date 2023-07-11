@@ -54,7 +54,8 @@ provider "opensearch" {
   url           = var.opensearch_logs_customer_endpoint
   username      = var.opensearch_logs_customer_master_username
   password      = var.opensearch_logs_customer_master_password
-  aws_region        = var.aws_default_region
+  aws_region    = var.aws_default_region
+  sign_aws_requests = true
 }
 
 data "terraform_remote_state" "target_vpc" {
