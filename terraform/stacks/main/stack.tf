@@ -52,8 +52,10 @@ provider "aws" {
 # Configure the Opensearch provider
 provider "opensearch" {
   url = var.opensearch_logs_customer_endpoint
+  aws_assume_role_arn = "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:role/bosh-passed/${data.terraform_remote_state.target_vpc.outputs.concourse_worker_profile}"
   # username      = var.opensearch_logs_customer_master_username
   # password      = var.opensearch_logs_customer_master_password
+  aws_region        = var.aws_default_region
   sign_aws_requests = true
   healthcheck = false
 }
