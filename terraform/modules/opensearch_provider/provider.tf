@@ -1,9 +1,3 @@
-# Configure the Opensearch provider
-provider "opensearch" {
-  url = "localhost:9200"
-  healthcheck = false
-}
-
 resource "opensearch_index" "test" {
   name               = "terraform-test"
   number_of_shards   = 1
@@ -24,8 +18,8 @@ resource "opensearch_index" "test" {
 EOF
 }
 
-resource "opensearch_component_template" "test" {
-  name = "terraform-test"
+resource "opensearch_component_template" "test2" {
+  name = "terraform-test2"
   body = <<EOF
 {
   "template": {

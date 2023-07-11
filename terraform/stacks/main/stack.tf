@@ -49,6 +49,12 @@ provider "aws" {
     }
   }
 }
+# Configure the Opensearch provider
+provider "opensearch" {
+  url           = module.opensearch_logs_customer.opensearch_logs_customer_endpoint
+  username      = var.opensearch_logs_customer_master_username
+  password      = var.opensearch_logs_customer_master_password
+}
 
 data "terraform_remote_state" "target_vpc" {
   # N.B. according to this issue comment https://github.com/hashicorp/terraform/issues/18611#issuecomment-410883474
@@ -315,8 +321,13 @@ module "opensearch_logs_customer" {
 }
 
 module "opensearch_provider" {
+  count                = var.deploy_opensearch_logs_customer ? 1 : 0
   source               = "../../modules/opensearch_provider"
   domain_name          = "${var.stack_description}-logs-customer"
+  providers = {
+    aws         = aws
+    opensearch = opensearch
+  }
 }
 
 module "logsearch" {
