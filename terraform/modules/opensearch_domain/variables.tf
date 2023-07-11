@@ -33,10 +33,12 @@ variable "internal_user_database_enabled" {
 
 variable "master_user_name" {
   type = string
+  default = null
 }
 
 variable "master_user_password" {
   type = string
+  default = null
 }
 
 variable "master_user_arn" {
