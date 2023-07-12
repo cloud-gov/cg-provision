@@ -525,6 +525,7 @@ jobs:
       TF_VAR_deploy_opensearch_logs_customer: "true"
       TF_VAR_opensearch_logs_customer_master_username: ((development_master_user_name))
       TF_VAR_opensearch_logs_customer_master_password: ((development_master_password))
+      TF_VAR_opensearch_logs_customer_endpoint: ((development_opensearch_logs_customer_endpoint))
       TF_VAR_admin_hosts: '["admin.dev.us-gov-west-1.aws-us-gov.cloud.gov"]'
       TF_VAR_shibboleth_hosts: '["idp.dev.us-gov-west-1.aws-us-gov.cloud.gov"]'
       TF_VAR_platform_kibana_hosts: '["logs-platform.dev.us-gov-west-1.aws-us-gov.cloud.gov"]'
