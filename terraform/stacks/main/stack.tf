@@ -53,12 +53,11 @@ provider "aws" {
 provider "opensearch" {
   url                 = var.opensearch_logs_customer_endpoint
   aws_region          =   var.aws_default_region
-  #aws_assume_role_arn = var.assume_arn
   sign_aws_requests = true
   sniff = false
   healthcheck = false
-  username      = var.opensearch_logs_customer_master_username
-  password      = var.opensearch_logs_customer_master_password
+  #username      = var.opensearch_logs_customer_master_username
+  #password      = var.opensearch_logs_customer_master_password
 }
 
 data "terraform_remote_state" "target_vpc" {
@@ -320,7 +319,7 @@ module "opensearch_logs_customer" {
   count                                     = var.deploy_opensearch_logs_customer ? 1 : 0
   source                                    = "../../modules/opensearch_domain"
   domain_name                               = "${var.stack_description}-logs-customer"
-  internal_user_database_enabled            = true
+  internal_user_database_enabled            = false
   vpc_id                                    = module.stack.vpc_id
   master_user_name                          = var.opensearch_logs_customer_master_username
   master_user_password                      = var.opensearch_logs_customer_master_password
