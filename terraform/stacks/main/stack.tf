@@ -55,7 +55,7 @@ provider "elasticsearch" {
   #aws_assume_role_arn = var.assume_arn
   username      = var.opensearch_logs_customer_master_username
   password      = var.opensearch_logs_customer_master_password
-  sign_aws_requests = false
+  sign_aws_requests = true
   healthcheck = false
 }
 
