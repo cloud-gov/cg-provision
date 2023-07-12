@@ -7,7 +7,7 @@ terraform {
       version = "< 6.0.0"
     }
     opensearch = {
-      source  = "github.com:serge-r/terraform-provider-opensearch.git"
+      source  = "github.com/serge-r/terraform-provider-opensearch"
     }
   }
 }
