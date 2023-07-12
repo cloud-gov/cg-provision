@@ -51,13 +51,10 @@ provider "aws" {
 }
 # Configure the Opensearch provider
 provider "opensearch" {
-  url                 = var.opensearch_logs_customer_endpoint
-  aws_region          =   var.aws_default_region
-  sign_aws_requests = true
-  sniff = false
-  healthcheck = false
-  #username      = var.opensearch_logs_customer_master_username
-  #password      = var.opensearch_logs_customer_master_password
+  url                = var.opensearch_logs_customer_endpoint
+  aws_region         = var.aws_default_region
+  sign_aws_requests  = true
+  opensearch_version = "OpenSearch_2.5"
 }
 
 data "terraform_remote_state" "target_vpc" {
@@ -335,8 +332,8 @@ module "opensearch_logs_customer" {
 }
 
 module "opensearch_provider" {
-  count       = var.deploy_opensearch_logs_customer ? 1 : 0
-  source      = "../../modules/opensearch_provider"
+  count  = var.deploy_opensearch_logs_customer ? 1 : 0
+  source = "../../modules/opensearch_provider"
   providers = {
     aws        = aws
     opensearch = opensearch

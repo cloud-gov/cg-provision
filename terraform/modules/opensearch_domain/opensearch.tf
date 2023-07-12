@@ -8,7 +8,7 @@ resource "aws_opensearch_domain" "opensearch" {
     master_user_options {
       #master_user_name     = var.master_user_name
       #master_user_password = var.master_user_password
-      master_user_arn      = var.master_user_arn
+      master_user_arn = var.master_user_arn
     }
   }
 
@@ -46,7 +46,7 @@ resource "aws_opensearch_domain" "opensearch" {
 }
 
 resource "opensearch_roles_mapping" "mapper" {
-  role_name      = "all_access"
-  users          = [var.master_user_name]
-  description    = "Mapping AWS IAM roles to ES role"
+  role_name   = "all_access"
+  users       = [var.master_user_name]
+  description = "Mapping AWS IAM roles to ES role"
 }

@@ -5,8 +5,8 @@ terraform {
       source  = "hashicorp/aws"
       version = "< 6.0.0"
     }
-     opensearch = {
-      source = "opensearch-project/opensearch"
+    opensearch = {
+      source  = "opensearch-project/opensearch"
       version = "1.0.0"
     }
   }
