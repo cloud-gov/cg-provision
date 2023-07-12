@@ -52,11 +52,12 @@ provider "aws" {
 # Configure the Opensearch provider
 provider "opensearch" {
   url                 = var.opensearch_logs_customer_endpoint
-  aws_region  =   var.aws_default_region
+  aws_region          =   var.aws_default_region
   #aws_assume_role_arn = var.assume_arn
   username      = var.opensearch_logs_customer_master_username
   password      = var.opensearch_logs_customer_master_password
-  sign_aws_requests = true
+  sign_aws_requests = false
+  sniff = false
   healthcheck = false
 }
 
