@@ -62,7 +62,7 @@ provider "opensearch" {
 }
 resource "opensearch_roles_mapping" "mapper" {
   role_name      = "all_access"
-  users          = var.opensearch_logs_customer_master_username
+  users          = [var.opensearch_logs_customer_master_username]
   description    = "Mapping AWS IAM roles to ES role"
 }
 data "terraform_remote_state" "target_vpc" {
