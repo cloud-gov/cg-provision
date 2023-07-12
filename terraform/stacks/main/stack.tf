@@ -324,7 +324,7 @@ module "opensearch_logs_customer" {
   vpc_id                                    = module.stack.vpc_id
   master_user_name                          = var.opensearch_logs_customer_master_username
   master_user_password                      = var.opensearch_logs_customer_master_password
-  # master_user_arn                           = "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:role/bosh-passed/${data.terraform_remote_state.target_vpc.outputs.concourse_worker_profile}"
+  master_user_arn                           = "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:role/bosh-passed/${data.terraform_remote_state.target_vpc.outputs.concourse_worker_profile}"
   allow_incoming_traffic_security_group_ids = [module.stack.bosh_security_group]
   allow_incoming_traffic_cidrs = [
     data.terraform_remote_state.target_vpc.outputs.production_concourse_subnet_cidr
