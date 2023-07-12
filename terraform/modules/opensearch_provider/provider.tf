@@ -1,16 +1,24 @@
-resource "opensearch_index" "test" {
-  name               = "terraform-test"
-  number_of_shards   = 1
-  number_of_replicas = 1
-  mappings           = <<EOF
+resource "elasicsearch_index_template" "test" {
+  name = "template_1"
+  body = <<EOF
 {
-  "people": {
-    "_all": {
-      "enabled": false
-    },
-    "properties": {
-      "email": {
-        "type": "text"
+  "template": "te*",
+  "settings": {
+    "number_of_shards": 1
+  },
+  "mappings": {
+    "type1": {
+      "_source": {
+        "enabled": false
+      },
+      "properties": {
+        "host_name": {
+          "type": "keyword"
+        },
+        "created_at": {
+          "type": "date",
+          "format": "EEE MMM dd HH:mm:ss Z YYYY"
+        }
       }
     }
   }
@@ -18,8 +26,8 @@ resource "opensearch_index" "test" {
 EOF
 }
 
-resource "opensearch_component_template" "test2" {
-  name = "terraform-test2"
+resource "elasticsearch_component_template" "test2" {
+  name = "terraform-test"
   body = <<EOF
 {
   "template": {
