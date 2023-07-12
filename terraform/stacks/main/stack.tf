@@ -335,10 +335,10 @@ module "opensearch_provider" {
   count       = var.deploy_opensearch_logs_customer ? 1 : 0
   source      = "../../modules/opensearch_provider"
   domain_name = "${var.stack_description}-logs-customer"
-  providers = {
-    aws        = aws
-    opensearch = opensearch
-  }
+  # providers = {
+  #   aws        = aws
+  #   opensearch = opensearch
+  # }
 }
 
 module "logsearch" {
