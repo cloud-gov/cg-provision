@@ -47,6 +47,6 @@ resource "aws_opensearch_domain" "opensearch" {
 
 resource "opensearch_roles_mapping" "mapper" {
   role_name      = "all_access"
-  users          = [var.opensearch_logs_customer_master_username]
+  users          = [var.master_user_name]
   description    = "Mapping AWS IAM roles to ES role"
 }
