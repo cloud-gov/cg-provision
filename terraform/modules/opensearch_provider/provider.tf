@@ -1,4 +1,4 @@
-resource "elasicsearch_index_template" "test" {
+resource "elasticsearch_index_template" "test" {
   name = "template_1"
   body = <<EOF
 {
