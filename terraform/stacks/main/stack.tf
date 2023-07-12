@@ -54,13 +54,17 @@ provider "opensearch" {
   url                 = var.opensearch_logs_customer_endpoint
   aws_region          =   var.aws_default_region
   #aws_assume_role_arn = var.assume_arn
-  username      = var.opensearch_logs_customer_master_username
-  password      = var.opensearch_logs_customer_master_password
   sign_aws_requests = false
   sniff = false
   healthcheck = false
+  username      = var.opensearch_logs_customer_master_username
+  password      = var.opensearch_logs_customer_master_password
 }
-
+resource "opensearch_roles_mapping" "mapper" {
+  role_name      = "all_access"
+  users          = var.opensearch_logs_customer_master_username
+  description    = "Mapping AWS IAM roles to ES role"
+}
 data "terraform_remote_state" "target_vpc" {
   # N.B. according to this issue comment https://github.com/hashicorp/terraform/issues/18611#issuecomment-410883474
   # the backend here should use the default credentials, which actually belong to the aws.tooling provider.
