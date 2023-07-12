@@ -1,4 +1,4 @@
-resource "elasticsearch_index_template" "test" {
+resource "opensearch_index_template" "test" {
   name = "template_1"
   body = <<EOF
 {
@@ -26,7 +26,7 @@ resource "elasticsearch_index_template" "test" {
 EOF
 }
 
-resource "elasticsearch_component_template" "test2" {
+resource "opensearch_component_template" "test2" {
   name = "terraform-test"
   body = <<EOF
 {
