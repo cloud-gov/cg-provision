@@ -49,6 +49,7 @@ provider "aws" {
     }
   }
 }
+
 # Configure the Opensearch provider
 provider "opensearch" {
   url                = var.opensearch_logs_customer_endpoint
@@ -330,11 +331,6 @@ module "opensearch_logs_customer" {
     module.cf.services_subnet_az1,
     module.cf.services_subnet_az2
   ]
-}
-
-module "opensearch_provider" {
-  count  = var.deploy_opensearch_logs_customer ? 1 : 0
-  source = "../../modules/opensearch_provider"
   providers = {
     aws        = aws
     opensearch = opensearch
