@@ -13,3 +13,19 @@ resource "opensearch_role" "cf_user" {
     document_level_security = "{\"bool\": {\"should\": [{\"terms\": { \"@cf.space_id\": [$${attr.proxy.spaceids}] }}, {\"terms\": {\"@cf.org_id\": [$${attr.proxy.orgids}]}}]}}"
   }
 }
+
+resource "opensearch_roles_mapping" "cf_user_mapping" {
+  role_name   = "cf_user"
+  description = "CF users with privileges to their own spaces"
+  backend_roles = [
+    "user",
+  ]
+}
+
+resource "opensearch_roles_mapping" "admin_all_access" {
+  role_name   = "all_access"
+  description = "Administrators with unrestricted access"
+  backend_roles = [
+    "admin",
+  ]
+}
