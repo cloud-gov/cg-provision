@@ -318,7 +318,7 @@ module "opensearch_logs_customer" {
   count                                     = var.deploy_opensearch_logs_customer ? 1 : 0
   source                                    = "../../modules/opensearch_domain"
   domain_name                               = "${var.stack_description}-logs-customer"
-  internal_user_database_enabled            = false
+  internal_user_database_enabled            = true
   vpc_id                                    = module.stack.vpc_id
   master_user_name                          = var.opensearch_logs_customer_master_username
   master_user_password                      = var.opensearch_logs_customer_master_password
