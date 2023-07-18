@@ -26,6 +26,9 @@ resource "opensearch_roles_mapping" "cf_user_mapping" {
 resource "opensearch_roles_mapping" "admin_all_access" {
   role_name   = "all_access"
   description = "Administrators with unrestricted access"
+  users = [
+    var.master_user_name
+  ]
   backend_roles = [
     "admin",
   ]
