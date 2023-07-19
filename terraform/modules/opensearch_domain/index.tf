@@ -1,5 +1,5 @@
-resource "opensearch_index_template" "logs-app-*" {
-  name     = testing
+resource "opensearch_index_template" "testing" {
+  name     = "testing"
   body     = <<EOF
 {
   "template" : "index_t*",
