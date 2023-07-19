@@ -27,9 +27,11 @@ resource "opensearch_roles_mapping" "admin_all_access" {
   role_name   = "all_access"
   description = "Mapping AWS IAM roles to ES role"
   users = [
-    var.master_user_name
+    var.master_user_name,
+    var.master_user_arn
   ]
   backend_roles = [
     "admin",
+    master_user_arn
   ]
 }
