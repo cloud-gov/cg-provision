@@ -17,9 +17,6 @@ resource "opensearch_index" "index" {
   mappings     = <<EOF
 {
     "test":{
-      "_all": {
-        "enabled": false
-      }
     }
 }
 EOF
