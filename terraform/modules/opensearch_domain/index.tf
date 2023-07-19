@@ -4,12 +4,12 @@ resource "opensearch_index_template" "testing" {
 {
   "template" : "index_t*",
   "settings": {
-    "codec"                                = "best_compression"
-    "number_of_replicas"                   = 1
-    "number_of_shards"                     = 5
-    "search_slowlog_threshold_query_debug" = "30s"
-    "search_slowlog_threshold_query_info"  = "15s"
-    "search_slowlog_threshold_query_trace" = "10s"
+    "codec"                                = "best_compression",
+    "number_of_replicas"                   = 1,
+    "number_of_shards"                     = 5,
+    "search_slowlog_threshold_query_debug" = "30s",
+    "search_slowlog_threshold_query_info"  = "15s",
+    "search_slowlog_threshold_query_trace" = "10s",
     "search_slowlog_threshold_query_warn"  = "5s"
    },
    "mappings": {
