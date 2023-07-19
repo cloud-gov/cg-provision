@@ -5,12 +5,7 @@ resource "opensearch_index_template" "index_template" {
   "template" : "index_t*",
   "settings": {
   "number_of_shards": 1
-   },
-   "mappings": {
-    "type1": {
-      "properties": {
-      }
-    }
+   }
   }
 }
 EOF
