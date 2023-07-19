@@ -9,9 +9,8 @@ resource "opensearch_index_template" "index_template" {
    "mappings": {
     "type1": {
       "properties": {
-        "created_at": {
-          "type": "date",
-          "format": "yyyy-MM-dd"
+        "FirstName": {
+            "type": "text"
         }
       }
     }
