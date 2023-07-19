@@ -9,9 +9,6 @@ resource "opensearch_index_template" "index_template" {
    "mappings": {
     "type1": {
       "properties": {
-        "FirstName": {
-            "type": "text"
-        }
       }
     }
   }
