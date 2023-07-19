@@ -11,7 +11,7 @@ resource "opensearch_index_template" "index_template" {
       "properties": {
         "created_at": {
           "type": "date",
-          "format": "EEE MMM dd HH:mm:ss Z YYYY"
+          "format": "yyyy-MM-dd"
         }
       }
     }
