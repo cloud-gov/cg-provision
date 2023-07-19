@@ -16,8 +16,6 @@ resource "opensearch_index" "index" {
   number_of_replicas = 1
   mappings     = <<EOF
 {
-    "test":{
-    }
 }
 EOF
 }
