@@ -6,7 +6,6 @@ resource "opensearch_index_template" "index_template" {
   "settings": {
   "number_of_shards": 1
    }
-  }
 }
 EOF
 }
