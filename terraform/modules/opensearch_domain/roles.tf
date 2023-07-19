@@ -32,6 +32,5 @@ resource "opensearch_roles_mapping" "admin_all_access" {
   ]
   backend_roles = [
     "admin",
-    master_user_arn,
   ]
 }
