@@ -1,8 +1,8 @@
 resource "opensearch_index_template" "index_template" {
-  name     = "test_index"
+  name     = "index_template"
   body     = <<EOF
 {
-  "template" : "test2",
+  "template" : "index_t*",
   "settings": {
   "number_of_shards": 1
    },
