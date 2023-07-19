@@ -44,9 +44,3 @@ resource "aws_opensearch_domain" "opensearch" {
     security_group_ids = [aws_security_group.opensearch_customer.id]
   }
 }
-
-resource "opensearch_roles_mapping" "mapper" {
-  role_name   = "all_access"
-  users       = [var.master_user_name]
-  description = "Mapping AWS IAM roles to ES role"
-}
