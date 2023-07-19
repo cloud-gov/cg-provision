@@ -9,3 +9,18 @@ resource "opensearch_index_template" "index_template" {
 }
 EOF
 }
+
+resource "opensearch_index" "index" {
+  name     = "index"
+  number_of_shards = 1
+  number_of_replicas = 1
+  mappings     = <<EOF
+{
+    "test":{
+      "_all": {
+        "enabled": false
+      }
+    }
+}
+EOF
+}
