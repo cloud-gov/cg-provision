@@ -20,7 +20,7 @@ resource "opensearch_role" "cf_user" {
 
 resource "opensearch_role" "cf_org_space_roles" {
   for_each = local.cf_org_roles_map
-  role_name = "${each.key}-${each.value}"
+  role_name = "${each.key}.${each.value}"
 
   cluster_permissions = [
     "read",
@@ -37,10 +37,10 @@ resource "opensearch_role" "cf_org_space_roles" {
 
 resource "opensearch_roles_mapping" "cf_org_space_roles_mapping" {
   for_each = local.cf_org_roles_map
-  role_name = "${each.key}-${each.value}"
+  role_name = "${each.key}.${each.value}"
   description = "CF users with privileges to their own spaces"
   backend_roles = [
-    "${each.key}-${each.value}"
+    "${each.key}.${each.value}"
   ]
 }
 
