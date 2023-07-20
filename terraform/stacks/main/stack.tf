@@ -331,6 +331,7 @@ module "opensearch_logs_customer" {
     module.cf.services_subnet_az1,
     module.cf.services_subnet_az2
   ]
+  cf_org_spaces = var.cf_org_spaces
   providers = {
     aws        = aws
     opensearch = opensearch

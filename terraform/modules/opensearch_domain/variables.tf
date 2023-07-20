@@ -66,3 +66,7 @@ variable "subnet_ids" {
   type        = list(string)
   description = "AWS Subnet IDs to use for Opensearch domain"
 }
+
+variable "cf_org_spaces" {
+  type = list
+}

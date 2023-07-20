@@ -173,3 +173,7 @@ variable "waf_label_host_0" {
 variable "waf_hostname_0" {
   type = string
 }
+
+variable "cf_org_spaces" {
+  type = list
+}
