@@ -68,5 +68,5 @@ variable "subnet_ids" {
 }
 
 variable "cf_org_spaces" {
-  type = map(string)
+  type = list
 }
