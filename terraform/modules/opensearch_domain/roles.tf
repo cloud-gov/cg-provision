@@ -1,6 +1,7 @@
-local {
+locals {
   cf_org_roles_map = { for org_space in var.cf_org_spaces: org_space.org => org_space.space }
 }
+
 resource "opensearch_role" "cf_user" {
   role_name = "cf_user"
 
