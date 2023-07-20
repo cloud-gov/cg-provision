@@ -15,8 +15,8 @@ resource "opensearch_role" "cf_user" {
 }
 
 resource "opensearch_role" "cf_org_space_roles" {
-  count = length(var.cf_org_spaces)
-  role_name = "${lookup(var.cf_org_spaces[count.index], "org")}-${lookup(var.cf_org_spaces[count.index], "space")}"
+  for_each = var.cf_org_spaces
+  role_name = "${each.key}-${each.value}"
 
   cluster_permissions = [
     "read",
@@ -27,16 +27,16 @@ resource "opensearch_role" "cf_org_space_roles" {
   index_permissions {
     index_patterns          = ["logs-app-*"]
     allowed_actions         = ["read"]
-    document_level_security = "{\"bool\": {\"should\": [{\"terms\": { \"@cf.space_id\": [${lookup(var.cf_org_spaces[count.index], "space")}] }}, {\"terms\": {\"@cf.org_id\": [${lookup(var.cf_org_spaces[count.index], "org")}]}}]}}"
+    document_level_security = "{\"bool\": {\"should\": [{\"terms\": { \"@cf.space_id\": [${each.value}] }}, {\"terms\": {\"@cf.org_id\": [${each.key}]}}]}}"
   }
 }
 
 resource "opensearch_roles_mapping" "cf_org_space_roles_mapping" {
-  count = length(var.cf_org_spaces)
-  role_name = "${lookup(var.cf_org_spaces[count.index], "org")}-${lookup(var.cf_org_spaces[count.index], "space")}"
+  for_each = var.cf_org_spaces
+  role_name = "${each.key}-${each.value}"
   description = "CF users with privileges to their own spaces"
   backend_roles = [
-    "${lookup(var.cf_org_spaces[count.index], "org")}-${lookup(var.cf_org_spaces[count.index], "space")}"
+    "${each.key}-${each.value}"
   ]
 }
 
