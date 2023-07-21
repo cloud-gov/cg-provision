@@ -50,7 +50,6 @@ resource "opensearch_roles_mapping" "cf_user_mapping" {
   backend_roles = [
     "user",
     aws_iam_user.dashboard_proxy_user.arn,
-    "cloud_controller.write"
   ]
 }
 
