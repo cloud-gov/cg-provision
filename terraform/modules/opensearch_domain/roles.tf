@@ -49,7 +49,8 @@ resource "opensearch_roles_mapping" "cf_user_mapping" {
   description = "CF users with privileges to their own spaces"
   backend_roles = [
     "user",
-    aws_iam_user.dashboard_proxy_user.arn
+    aws_iam_user.dashboard_proxy_user.arn,
+    "cloud_controller.read"
   ]
 }
 
