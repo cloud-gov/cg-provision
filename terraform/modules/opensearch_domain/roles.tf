@@ -14,11 +14,10 @@ resource "opensearch_role" "cf_user" {
   index_permissions {
     index_patterns          = ["logs-app-*"]
     allowed_actions         = ["read"]
-    document_level_security = "{\"bool\": {\"should\": [{\"terms\": { \"@cf.space_id\": [$${attr.proxy.spaceids}] }}, {\"terms\": {\"@cf.org_id\": [$${attr.proxy.orgids}]}}]}}"
   }
 
   tenant_permissions {
-    tenant_patterns = ["global"]
+    tenant_patterns = ["global_tenant"]
     allowed_actions = ["read"]
   }
 }
@@ -36,7 +35,16 @@ resource "opensearch_role" "cf_org_space_roles" {
   index_permissions {
     index_patterns          = ["logs-app-*"]
     allowed_actions         = ["read"]
-    document_level_security = "{\"bool\": {\"should\": [{\"terms\": { \"@cf.space_id\": [${each.value}] }}, {\"terms\": {\"@cf.org_id\": [${each.key}]}}]}}"
+    document_level_security = <<EOF
+{
+  "bool": {
+    "must": [
+      {"match": { "@cf.space_id": "${each.value}" }},
+      {"match": { "@cf.org_id": "${each.key}" }}
+    ]
+  }
+}
+EOF
   }
 }
 
