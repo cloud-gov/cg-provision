@@ -56,3 +56,21 @@ resource "opensearch_index_template" "app_logs_template" {
 }
 EOF
 }
+
+resource "opensearch_dashboard_object" "logs_app_index_pattern" {
+  body = <<EOF
+[
+  {
+    "_id": "index-pattern:logs-app",
+    "_type": "doc",
+    "_source": {
+      "type": "index-pattern",
+      "index-pattern": {
+        "title": "logs-app-*",
+        "timeFieldName": "timestamp"
+      }
+    }
+  }
+]
+EOF
+}
