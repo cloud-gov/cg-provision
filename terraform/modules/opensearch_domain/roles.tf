@@ -16,6 +16,11 @@ resource "opensearch_role" "cf_user" {
     allowed_actions         = ["read"]
     document_level_security = "{\"bool\": {\"should\": [{\"terms\": { \"@cf.space_id\": [$${attr.proxy.spaceids}] }}, {\"terms\": {\"@cf.org_id\": [$${attr.proxy.orgids}]}}]}}"
   }
+
+  tenant_permissions {
+    tenant_patterns = ["global"]
+    allowed_actions = ["read"]
+  }
 }
 
 resource "opensearch_role" "cf_org_space_roles" {
