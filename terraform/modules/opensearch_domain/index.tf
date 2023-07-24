@@ -4,7 +4,6 @@ resource "opensearch_index_template" "app_logs_template" {
 {
 	"index_patterns": ["logs-app-*"],
 	"template": "index_t*",
-	"priority": 202,
 	"settings": {
 		"codec": "best_compression",
 		"number_of_replicas": 1,
