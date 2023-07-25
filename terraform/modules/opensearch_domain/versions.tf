@@ -6,7 +6,7 @@ terraform {
       version = "< 6.0.0"
     }
     opensearch = {
-      source  = "github.com/cloud-gov/opensearch.git"
+      source  = "github.com/cloud-gov/opensearch"
     }
   }
 }
