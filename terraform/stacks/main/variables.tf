@@ -314,6 +314,6 @@ variable "bad_inputs_scope_down_statements" {
       }))
     }))
   }))
-  description = "list of objects defining regular expression rules for waf"
+  description = "list of objects defining scope down statements for WAF"
   default     = []
 }
