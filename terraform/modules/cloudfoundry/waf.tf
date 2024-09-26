@@ -141,40 +141,55 @@ resource "aws_wafv2_web_acl" "cf_uaa_waf_core" {
 
         scope_down_statement {
           and_statement {
-            statement {
-              not_statement {
-                statement {
-                  byte_match_statement {
-                    search_string         = var.scope_down_known_bad_inputs_not_match_origin_search_string
-                    positional_constraint = "EXACTLY"
+            dynamic "statement" {
+              for_each = var.bad_inputs_scope_down_statements
+              iterator = scope_down
 
-                    text_transformation {
-                      priority = 0
-                      type     = "NONE"
-                    }
+              content {
+                dynamic "not_statement" {
+                  for_each = scope_down.value.not_statement
+                  iterator = not_statement
 
-                    field_to_match {
-                      single_header {
-                        name = "origin"
+                  content {
+                    statement {
+                      dynamic "byte_match_statement" {
+                        for_each = not_statement.value.byte_match_statement
+                        iterator = byte_match_statement
+
+                        content {
+                          search_string         = byte_match_statement.value.search_string
+                          positional_constraint = "EXACTLY"
+
+                          text_transformation {
+                            priority = 0
+                            type     = "NONE"
+                          }
+
+                          field_to_match {
+                            single_header {
+                              name = byte_match_statement.value.field_name
+                            }
+                          }
+                        }
                       }
-                    }
-                  }
-                }
-              }
-            }
-            statement {
-              not_statement {
-                statement {
-                  regex_match_statement {
-                    regex_string = var.scope_down_known_bad_inputs_not_match_uri_path_regex_string
 
-                    text_transformation {
-                      priority = 0
-                      type     = "NONE"
-                    }
+                      dynamic "regex_match_statement" {
+                        for_each = not_statement.value.uri_path_regex_match_statement
+                        iterator = uri_path_regex_match_statement
 
-                    field_to_match {
-                      uri_path {}
+                        content {
+                          regex_string = uri_path_regex_match_statement.value.regex_string
+
+                          text_transformation {
+                            priority = 0
+                            type     = "NONE"
+                          }
+
+                          field_to_match {
+                            uri_path {}
+                          }
+                        }
+                      }
                     }
                   }
                 }

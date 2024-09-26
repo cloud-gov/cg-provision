@@ -295,3 +295,19 @@ variable "ecr_stack_name" {
   description = "The name of the stack that configures ECR."
   default     = "ecr"
 }
+
+variable "bad_inputs_scope_down_statements" {
+  type = list(object({
+    not_statement = list(object({
+      byte_match_statement = list(object({
+        search_string = string
+        origin        = string
+      }))
+      uri_path_regex_match_statement = list(object({
+        regex_string = string
+      }))
+    }))
+  }))
+  description = "list of objects defining regular expression rules for waf"
+  default     = []
+}
