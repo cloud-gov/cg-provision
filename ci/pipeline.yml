@@ -498,7 +498,7 @@ jobs:
           TF_VAR_rds_multi_az: "false"
           TF_VAR_remote_state_bucket: ((aws_s3_tfstate_bucket))
           TF_VAR_vpc_cidr: ((development_vpc_cidr))
-          TF_VAR_rds_db_engine_version: "15.5"
+          TF_VAR_rds_db_engine_version: "15.7"
           TF_VAR_rds_parameter_group_family: "postgres15"
           TF_VAR_rds_db_engine_version_cf: "16.3"
           TF_VAR_rds_parameter_group_family_cf: "postgres16"
