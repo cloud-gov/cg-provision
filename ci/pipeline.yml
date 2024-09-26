@@ -717,6 +717,7 @@ jobs:
           TF_VAR_domains_lbgroup_count: 3
           TF_VAR_waf_regex_rules: "((staging_waf_regex_rules))"
           TF_VAR_aws_lb_listener_ssl_policy: "ELBSecurityPolicy-TLS13-1-2-FIPS-2023-04"
+          TF_VAR_bad_inputs_scope_down_statements: "((staging_bad_inputs_scope_down_statements))"
       - *notify-slack
 
   - name: apply-staging
@@ -888,6 +889,7 @@ jobs:
           TF_VAR_cidr_blocks: ((cidr_blocks))
           TF_VAR_domains_lbgroup_count: 4
           TF_VAR_waf_regex_rules: "((production_waf_regex_rules))"
+          TF_VAR_bad_inputs_scope_down_statements: "((production_bad_inputs_scope_down_statements))"
       - *notify-slack
 
   - name: apply-production
