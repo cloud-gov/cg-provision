@@ -155,41 +155,43 @@ resource "aws_wafv2_web_acl" "cf_uaa_waf_core" {
                       for_each = not_statement.value.statement
                       iterator = statement
 
-                      dynamic "byte_match_statement" {
-                        for_each = statement.value.byte_match_statement
-                        iterator = byte_match_statement
+                      content {
+                        dynamic "byte_match_statement" {
+                          for_each = statement.value.byte_match_statement
+                          iterator = byte_match_statement
 
-                        content {
-                          search_string         = byte_match_statement.value.search_string
-                          positional_constraint = "EXACTLY"
+                          content {
+                            search_string         = byte_match_statement.value.search_string
+                            positional_constraint = "EXACTLY"
 
-                          text_transformation {
-                            priority = 0
-                            type     = "NONE"
-                          }
+                            text_transformation {
+                              priority = 0
+                              type     = "NONE"
+                            }
 
-                          field_to_match {
-                            single_header {
-                              name = byte_match_statement.value.field_name
+                            field_to_match {
+                              single_header {
+                                name = byte_match_statement.value.field_name
+                              }
                             }
                           }
                         }
-                      }
 
-                      dynamic "regex_match_statement" {
-                        for_each = statement.value.uri_path_regex_match_statement
-                        iterator = uri_path_regex_match_statement
+                        dynamic "regex_match_statement" {
+                          for_each = statement.value.uri_path_regex_match_statement
+                          iterator = uri_path_regex_match_statement
 
-                        content {
-                          regex_string = uri_path_regex_match_statement.value.regex_string
+                          content {
+                            regex_string = uri_path_regex_match_statement.value.regex_string
 
-                          text_transformation {
-                            priority = 0
-                            type     = "NONE"
-                          }
+                            text_transformation {
+                              priority = 0
+                              type     = "NONE"
+                            }
 
-                          field_to_match {
-                            uri_path {}
+                            field_to_match {
+                              uri_path {}
+                            }
                           }
                         }
                       }
