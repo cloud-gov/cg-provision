@@ -151,9 +151,12 @@ resource "aws_wafv2_web_acl" "cf_uaa_waf_core" {
                   iterator = not_statement
 
                   content {
-                    statement {
+                    dynamic "statement" {
+                      for_each = not_statement.value.statement
+                      iterator = statement
+
                       dynamic "byte_match_statement" {
-                        for_each = not_statement.value.byte_match_statement
+                        for_each = statement.value.byte_match_statement
                         iterator = byte_match_statement
 
                         content {
@@ -174,7 +177,7 @@ resource "aws_wafv2_web_acl" "cf_uaa_waf_core" {
                       }
 
                       dynamic "regex_match_statement" {
-                        for_each = not_statement.value.uri_path_regex_match_statement
+                        for_each = statement.value.uri_path_regex_match_statement
                         iterator = uri_path_regex_match_statement
 
                         content {
