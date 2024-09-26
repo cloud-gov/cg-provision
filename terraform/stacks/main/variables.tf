@@ -300,13 +300,13 @@ variable "bad_inputs_scope_down_statements" {
   type = list(object({
     not_statement = list(object({
       statement = list(object({
-        byte_match_statement = list(object({
+        byte_match_statement = optional(list(object({
           search_string = string
           field_name    = string
-        }))
-        uri_path_regex_match_statement = list(object({
+        })), [])
+        uri_path_regex_match_statement = optional(list(object({
           regex_string = string
-        }))
+        })), [])
       }))
     }))
   }))
